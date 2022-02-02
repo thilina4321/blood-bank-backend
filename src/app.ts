@@ -24,3 +24,6 @@ app.all("*", () => {
 app.use(ErrorHandling);
 
 export { app };
+
+console.log('testing...');
+
