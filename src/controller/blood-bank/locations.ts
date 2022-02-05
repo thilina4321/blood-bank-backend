@@ -1,9 +1,10 @@
 import { Location } from "../../model/blood-bank/location";
 import { Request, Response } from "express";
 import { findDataByIdHelper } from "../common";
+import { model } from "mongoose";
 
 export const getBloodBankLocations = async (_: Request, res: Response) => {
-  const locations = Location.find();
+  const locations = await Location.find();
   res.status(200).send({
     success: true,
     data: locations,
@@ -12,7 +13,7 @@ export const getBloodBankLocations = async (_: Request, res: Response) => {
 
 export const addBloodBankLocation = async (req: Request, res: Response) => {
   const { name, imageUrl, latitude, longitude, description } = req.body;
-  const createModelData = await Location.build({
+  const createModelData = Location.build({
     name,
     imageUrl,
     latitude,
@@ -55,3 +56,7 @@ export const deleteBloodBankLocations = async (req: Request, res: Response) => {
     message: "delete location successfully",
   });
 };
+
+// model.find({
+//   _id: { $in: ["61fec98fd0f83062adde8ca6", "61fec9a8d0f83062adde8ca8"] },
+// });

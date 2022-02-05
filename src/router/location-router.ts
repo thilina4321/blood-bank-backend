@@ -10,7 +10,7 @@ import { body } from "express-validator";
 
 const router = express.Router();
 
-router.get("/blood-bank/get-locations", validateRequest, getBloodBankLocations);
+router.get("/blood-bank/get-locations", getBloodBankLocations);
 
 router.post(
   "/blood-bank/add-location",
@@ -23,7 +23,7 @@ router.post(
       .withMessage("Please provide the description"),
   ],
   validateRequest,
-  requireAuth,
+  // requireAuth,
   addBloodBankLocation
 );
 
