@@ -20,17 +20,13 @@ export const currentUser = (
   next: NextFunction
 ) => {
   const token = req.get("Authorization")?.replace("Bearer ", "");
-  
+
   if (!token) {
     return next();
   }
 
-  
   try {
-    const payload = jwt.verify(
-      token,
-      process.env.JWT_KEY!
-    ) as UserPayload;
+    const payload = jwt.verify(token, process.env.JWT_KEY!) as UserPayload;
     req.currentUser = payload;
   } catch (err) {}
 

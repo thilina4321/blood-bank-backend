@@ -23,7 +23,7 @@ router.post(
   [
     body("email").isEmail().withMessage("Invalid email address"),
     body("password").notEmpty().withMessage("Please provide the password"),
-  ],
+  ], 
   validateRequest,
   signIn
 );
