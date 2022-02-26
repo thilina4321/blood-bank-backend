@@ -30,6 +30,6 @@ router.post(
 
 router.put("/blood-bank/update-stock/:id", requireAuth, updateBloodStocks);
 
-router.post("/blood-bank/delete-stock/:id", requireAuth, deleteBloodStocks);
+router.delete("/blood-bank/delete-stock/:id", requireAuth, deleteBloodStocks);
 
 export { router as stockRouter };
