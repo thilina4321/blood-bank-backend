@@ -6,6 +6,7 @@ const commonName = "stock";
 
 export const getBloodStocks = async (_: Request, res: Response) => {
   const stocks = await Stock.find();
+  
   res.status(200).send({
     success: true,
     data: stocks,
