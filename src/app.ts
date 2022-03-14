@@ -14,8 +14,10 @@ import { authRouter } from "./router/auth-router";
 import { locationRouter } from "./router/location-router";
 import { faqRouter } from "./router/home/faq-router";
 import { stockRouter } from "./router/blood/stock";
+import { eligibilityRouter } from "./router/blood/eligibility";
 import { doctorNotesRoutes } from "./router/about/doctor-note";
 import { contactRouter } from "./router/contact/contact-router";
+import { contactQueryRouter } from "./router/contact/query-router";
 
 app.use(express.json());
 app.use(cors());
@@ -28,8 +30,10 @@ app.use(authRouter);
 app.use(locationRouter);
 app.use(faqRouter);
 app.use(stockRouter);
+app.use(eligibilityRouter);
 app.use(doctorNotesRoutes);
 app.use(contactRouter);
+app.use(contactQueryRouter);
 
 app.all("*", () => {
   throw new NotFoundError();

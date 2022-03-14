@@ -24,7 +24,7 @@ router.post(
       .withMessage("Please provide the position"),
   ],
   validateRequest,
-  requireAuth,
+  // requireAuth,
   addDoctorsNotes
 );
 
