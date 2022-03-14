@@ -15,6 +15,7 @@ import { locationRouter } from "./router/location-router";
 import { faqRouter } from "./router/home/faq-router";
 import { stockRouter } from "./router/blood/stock";
 import { doctorNotesRoutes } from "./router/about/doctor-note";
+import { contactRouter } from "./router/contact/contact-router";
 
 app.use(express.json());
 app.use(cors());
@@ -28,6 +29,7 @@ app.use(locationRouter);
 app.use(faqRouter);
 app.use(stockRouter);
 app.use(doctorNotesRoutes);
+app.use(contactRouter);
 
 app.all("*", () => {
   throw new NotFoundError();
