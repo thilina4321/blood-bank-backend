@@ -13,7 +13,7 @@ export const getHomeFaqs = async (_: Request, res: Response) => {
 
 export const addHomeFaqs = async (req: Request, res: Response) => {
   const { question, answer } = req.body;
-  const createModelData = await Faq.build({
+  const createModelData =  Faq.build({
     question,
     answer,
   });
