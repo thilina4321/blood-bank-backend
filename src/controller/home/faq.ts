@@ -11,6 +11,17 @@ export const getHomeFaqs = async (_: Request, res: Response) => {
   });
 };
 
+export const getSingleFaq = async (req: Request, res: Response) => {
+  const {question} = req.params
+  
+  const data = await Faq.find({question});
+  res.status(200).send({
+    success: true,
+    data,
+    message: "faqs fetch successfully",
+  });
+};
+
 export const addHomeFaqs = async (req: Request, res: Response) => {
   const { question, answer } = req.body;
   const createModelData =  Faq.build({

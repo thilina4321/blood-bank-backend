@@ -5,6 +5,7 @@ import {
   addHomeFaqs,
   updateHomeFaq,
   deleteHomeFaq,
+  getSingleFaq,
 } from "../../controller/home/faq";
 
 import { validateRequest, requireAuth } from "../../middleware";
@@ -12,25 +13,30 @@ import { body } from "express-validator";
 
 const router = express.Router();
 
-router.get("/home/get-faqs", validateRequest, getHomeFaqs);
+router.get("/home/faqs", validateRequest, getHomeFaqs);
+router.get("/home/faqs/:question", getSingleFaq);
 
 router.post(
-  "/home/add-faq",
+  "/home/faqs",
   [
     body("question").notEmpty().withMessage("Please provide the question"),
     body("answer").notEmpty().withMessage("Please provide the answer"),
   ],
   validateRequest,
-//   requireAuth,
+  //   requireAuth,
   addHomeFaqs
 );
 
-router.put("/home/update-faq/:id",
-//  requireAuth, 
- updateHomeFaq);
+router.put(
+  "/home/faqs/:id",
+  //  requireAuth,
+  updateHomeFaq
+);
 
-router.delete("/home/delete-faq/:id",
-//  requireAuth,
-  deleteHomeFaq);
+router.delete(
+  "/home/faqs/:id",
+  //  requireAuth,
+  deleteHomeFaq
+);
 
 export { router as faqRouter };
