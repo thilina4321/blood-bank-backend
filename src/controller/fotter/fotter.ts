@@ -14,11 +14,11 @@ export const getFotter = async (_: Request, res: Response) => {
 };
 
 export const addFotter = async (req: Request, res: Response) => {
-  const { title, url } = req.body;
+  const { title, url , type} = req.body;
 
   const createModelData = Fotter.build({
     title,
-    url,
+    url, type
   });
 
   const data = await createModelData.save();
@@ -29,11 +29,11 @@ export const addFotter = async (req: Request, res: Response) => {
 
 export const updateFotter = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { title, url } = req.body;
+  const { title, url, type } = req.body;
 
   const data = await findDataByIdHelper(id, Fotter, msgName);
 
-  await data?.set({ title, url });
+  await data?.set({ title, url, type });
 
   await data?.save();
 

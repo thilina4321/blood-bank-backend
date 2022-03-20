@@ -10,16 +10,15 @@ import { validateRequest, requireAuth } from "../../middleware";
 import { body } from "express-validator";
 
 const router = express.Router();
-
+ 
 router.get("/fotter", getFotter);
 
 router.post(
   "/fotter",
   [
     body("title").notEmpty().withMessage("Please provide the title"),
-    body("url")
-      .notEmpty()
-      .withMessage("Please provide the url"),
+    body("type").notEmpty().withMessage("Please provide the type"),
+    body("url").notEmpty().withMessage("Please provide the url"),
   ],
   validateRequest,
   //   requireAuth,

@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 interface FooterAttrs {
   title: string;
   url: string;
+  type: string;
 }
 
 interface FooterModel extends mongoose.Model<FooterDoc> {
@@ -10,14 +11,16 @@ interface FooterModel extends mongoose.Model<FooterDoc> {
 }
 
 interface FooterDoc extends mongoose.Document {
-    title: string;
-    url: string;
+  title: string;
+  url: string;
+  type: string;
 }
 
 const fotter = new Schema(
   {
     title: String,
     url: String,
+    type: String,
   },
   {
     toJSON: {
@@ -35,7 +38,4 @@ fotter.statics.build = function (attrs: FooterAttrs) {
   return new Fotter(attrs);
 };
 
-export const Fotter = mongoose.model<FooterDoc, FooterModel>(
-  "fotter",
-  fotter
-);
+export const Fotter = mongoose.model<FooterDoc, FooterModel>("fotter", fotter);
