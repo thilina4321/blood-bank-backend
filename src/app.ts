@@ -20,6 +20,7 @@ import { donateBloodRouter } from "./router/blood/donate-blood";
 import { doctorNotesRoutes } from "./router/about/doctor-note";
 import { contactRouter } from "./router/contact/contact-router";
 import { contactQueryRouter } from "./router/contact/query-router";
+import { fotterRouter } from "./router/fotter/fotter";
 
 app.use(express.json());
 app.use(cors());
@@ -38,6 +39,7 @@ app.use(donateBloodRouter);
 app.use(doctorNotesRoutes);
 app.use(contactRouter);
 app.use(contactQueryRouter);
+app.use(fotterRouter);
 
 app.all("*", () => {
   throw new NotFoundError();
