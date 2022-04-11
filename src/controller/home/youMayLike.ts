@@ -1,7 +1,7 @@
 import { YouMayLike } from "../../model/home/youMayLike";
 import { Request, Response } from "express";
 import { findDataByIdHelper } from "../common";
-import { singleItemError } from "../../error/single-item-error";
+import { isSingleItemCreate } from "../../error/single-item-error";
 import { BadRequest } from "../../error";
 
 const msgName = "you may like";
@@ -37,9 +37,20 @@ export const getSingleYouMayLike = async (req: Request, res: Response) => {
 };
 
 export const addYouMayLike = async (req: Request, res: Response) => {
-  const { title, imageUrl, items } = req.body;
+  const { title, imageUrl, items = [] } = req.body;
 
-  await singleItemError(YouMayLike);
+  const isCreate = await isSingleItemCreate(YouMayLike);
+  let data;
+
+  if (!isCreate) {
+    const findData = await YouMayLike.find();
+    findData[0]?.set({ title, imageUrl, items: findData[0]?.items });
+    data = await findData[0]?.save();
+
+    return res
+      .status(201)
+      .send({ success: true, data, message: `create ${msgName} successfully` });
+  }
 
   const createModelData = YouMayLike.build({
     title,
@@ -47,7 +58,7 @@ export const addYouMayLike = async (req: Request, res: Response) => {
     items,
   });
 
-  const data = await createModelData.save();
+  data = await createModelData.save();
   res
     .status(201)
     .send({ success: true, data, message: `create ${msgName} successfully` });

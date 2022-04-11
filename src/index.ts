@@ -1,9 +1,10 @@
 import { connect } from "mongoose";
 import { app } from "./app";
 
-const port = 8000;
+const port = process.env.PORT;
+const dbConnectionUrl = process.env.DB_CONNECTION_URL!
 
-connect("mongodb://127.0.0.1:27017/dummy-sample")
+connect(dbConnectionUrl)
   .then(() => {
     app.listen(port, () => {
       console.log("Auth service is starts in port ", port);
