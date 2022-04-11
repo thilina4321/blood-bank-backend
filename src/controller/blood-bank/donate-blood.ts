@@ -2,7 +2,7 @@ import { DonateBlood } from "../../model/blood-bank/donate-blood";
 import { Request, Response } from "express";
 import { findDataByIdHelper } from "../common";
 import { BadRequest } from "../../error/bad-request";
-import { singleItemError } from "../../error/single-item-error";
+import { isSingleItemCreate } from "../../error/single-item-error";
 
 const msgName = "donate blood";
 
@@ -18,7 +18,7 @@ export const getDonateBlood = async (_: Request, res: Response) => {
 export const addDonateBlood = async (req: Request, res: Response) => {
   const { title, description, items } = req.body;
   
-  await singleItemError(DonateBlood);
+  await isSingleItemCreate(DonateBlood);
   
   const createModelData = DonateBlood.build({
     title,

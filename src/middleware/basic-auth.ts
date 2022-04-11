@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
 
 interface UserPayload {
   id: string;
@@ -14,6 +13,8 @@ declare global {
   }
 }
 
+// basic auth is not use in the application
+// so this middleware is not finish properly
 export const basicAuth = (
   req: Request,
   res: Response,
@@ -27,7 +28,7 @@ export const basicAuth = (
     "ascii"
   );
   
-  const [username, password] = credentials.split(":");
+  // const [username, password] = credentials.split(":");
 
   
 

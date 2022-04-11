@@ -25,10 +25,8 @@ export const currentUser = (
     return next();
   }
 
-  try {
     const payload = jwt.verify(token, process.env.JWT_KEY!) as UserPayload;
     req.currentUser = payload;
-  } catch (err) {}
 
   next();
 };
