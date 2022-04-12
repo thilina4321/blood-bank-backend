@@ -17,16 +17,27 @@ export const getDonateBlood = async (_: Request, res: Response) => {
 
 export const addDonateBlood = async (req: Request, res: Response) => {
   const { title, description, items } = req.body;
-  
-  await isSingleItemCreate(DonateBlood);
-  
+
+  let isCreate = await isSingleItemCreate(DonateBlood);
+  let data;
+
+  if (!isCreate) {
+    const findData = await DonateBlood.find();
+    findData[0]?.set({ title, description, items: findData[0]?.items });
+    data = await findData[0]?.save();
+
+    return res
+      .status(201)
+      .send({ success: true, data, message: `create ${msgName} successfully` });
+  }
+
   const createModelData = DonateBlood.build({
     title,
     description,
     items,
   });
 
-  const data = await createModelData.save();
+  data = await createModelData.save();
   res
     .status(201)
     .send({ success: true, data, message: `create ${msgName} successfully` });
