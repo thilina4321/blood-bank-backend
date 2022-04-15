@@ -1,7 +1,6 @@
 import { DonateBlood } from "../../model/blood-bank/donate-blood";
 import { Request, Response } from "express";
 import { findDataByIdHelper } from "../common";
-import { BadRequest } from "../../error/bad-request";
 import { isSingleItemCreate } from "../../error/single-item-error";
 
 const msgName = "donate blood";
